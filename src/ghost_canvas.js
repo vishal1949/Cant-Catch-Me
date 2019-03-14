@@ -1,9 +1,14 @@
 // let xpos = 300;
 // let ypos = 300;
+
 let xpos = getRandomInt(550);
 let ypos = getRandomInt(350);
 let velX = getRandomInt(5);
 let velY = getRandomInt(5);
+if(velY === 0 || velX === 0){
+    velY++;
+    velX++;
+}
 
 function drawCircleGhost(xpos, ypos, radius){
     let c = document.getElementById("game-canvas");
@@ -24,18 +29,14 @@ function moveDirection(){
     let ctx = c.getContext('2d');
     ctx.clearRect(0, 0, 600, 400);
     drawCircleGhost(xpos, ypos, radius);
-    // debugger
     xpos += velX;
     ypos += velY;
-    // console.log(xpos);
-    // console.log(ypos);
     if (xpos + radius > 600 || xpos - radius < 0) {
         velX *= -1;
     }
     if (ypos + radius > 400 || ypos - radius < 0) {
         velY *= -1;
     }
-    // moveDirection(xpos, ypos)
     requestAnimationFrame(() => moveDirection());
 }
 

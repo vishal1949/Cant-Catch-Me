@@ -119,14 +119,25 @@ eval("module.exports = function(module) {\n\tif (!module.webpackPolyfill) {\n\t\
 
 /***/ }),
 
-/***/ "./src/ghost_canvas.js":
-/*!*****************************!*\
-  !*** ./src/ghost_canvas.js ***!
-  \*****************************/
+/***/ "./src/game.js":
+/*!*********************!*\
+  !*** ./src/game.js ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("const Ghost = __webpack_require__(/*! ./ghosts */ \"./src/ghosts.js\");\nconst ctx = document.getElementById(\"game-canvas\").getContext('2d');\n\nclass Game {\n    constructor(){\n        let g = new Ghost(ctx);\n        let g2 = new Ghost(ctx);\n        let g3 = new Ghost(ctx);\n        let ghosts = [g, g2, g3];\n        this.drawGhost = this.drawGhost.bind(this);\n        this.drawGhost(ghosts)\n    }\n    drawGhost(ghostArray) {\n        requestAnimationFrame(() => {\n            ctx.clearRect(0, 0, 800, 500);\n            this.drawGhost(ghostArray)\n        });\n        for (let i = 0; i < ghostArray.length; i++) {\n            ctx.drawImage(ghostArray[i].icon, ghostArray[i].xpos, ghostArray[i].ypos, ghostArray[i].radius, ghostArray[i].radius )\n            ghostArray[i].moveDirection();\n        }\n    }\n}\n\nmodule.exports = Game;\n\n//# sourceURL=webpack:///./src/game.js?");
+
+/***/ }),
+
+/***/ "./src/ghosts.js":
+/*!***********************!*\
+  !*** ./src/ghosts.js ***!
+  \***********************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("// let xpos = 300;\n// let ypos = 300;\nlet xpos = getRandomInt(550);\nlet ypos = getRandomInt(350);\nlet velX = getRandomInt(5);\nlet velY = getRandomInt(5);\n\nfunction drawCircleGhost(xpos, ypos, radius){\n    let c = document.getElementById(\"game-canvas\");\n    let ctx = c.getContext('2d');\n    ctx.beginPath();\n    ctx.arc(xpos, ypos, radius, 0, 2 * Math.PI);\n    ctx.fill();\n    ctx.stroke();\n\n}\nfunction getRandomInt(max) {\n    return Math.floor(Math.random() * Math.floor(max));\n}\n\nfunction moveDirection(){\n    let radius = 10;\n    let c = document.getElementById(\"game-canvas\");\n    let ctx = c.getContext('2d');\n    ctx.clearRect(0, 0, 600, 400);\n    drawCircleGhost(xpos, ypos, radius);\n    // debugger\n    xpos += velX;\n    ypos += velY;\n    // console.log(xpos);\n    // console.log(ypos);\n    if (xpos + radius > 600 || xpos - radius < 0) {\n        velX *= -1;\n    }\n    if (ypos + radius > 400 || ypos - radius < 0) {\n        velY *= -1;\n    }\n    // moveDirection(xpos, ypos)\n    requestAnimationFrame(() => moveDirection());\n}\n\n\n\nmodule.exports = drawCircleGhost;\nmodule.exports = moveDirection;\n\n\n//# sourceURL=webpack:///./src/ghost_canvas.js?");
+eval("function getRandomInt(max) {\n    return Math.floor(Math.random() * Math.floor(max)) + 1;\n}\n\nclass Ghost {\n    constructor(){\n        this.icon = new Image();\n        this.icon.src = \"img/ghost.jpg\";\n        this.xpos = getRandomInt(550);\n        this.ypos = getRandomInt(350);\n        this.velX = getRandomInt(7);\n        this.velY = getRandomInt(7);\n        let r = getRandomInt(3);\n        if(r === 1){\n            this.radius = 20;\n        }else if(r === 2){\n            this.radius = 35;\n        }else{\n            this.radius = 50;\n        }\n        this.ctx = document.getElementById(\"game-canvas\").getContext('2d');\n        this.moveDirection = this.moveDirection.bind(this);\n    }\n\n    \n    moveDirection() {\n        // let radius = 10;\n        this.xpos += this.velX;\n        this.ypos += this.velY;\n        if (this.xpos + this.radius > 800 || this.xpos < 3) {\n            this.velX *= -1;\n        }\n        if (this.ypos + this.radius > 500 || this.ypos < 3) {\n            this.velY *= -1;\n        }\n    }\n}\n\nmodule.exports = Ghost;\n\n \n\n//# sourceURL=webpack:///./src/ghosts.js?");
 
 /***/ }),
 
@@ -138,7 +149,7 @@ eval("// let xpos = 300;\n// let ypos = 300;\nlet xpos = getRandomInt(550);\nlet
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n\nconst drawCircleGhost = __webpack_require__(/*! ./ghost_canvas */ \"./src/ghost_canvas.js\");\nconst moveDirection = __webpack_require__(/*! ./ghost_canvas */ \"./src/ghost_canvas.js\")\nfunction getRandomInt(max) {\n    return Math.floor(Math.random() * Math.floor(max));\n}\n\nmoveDirection()\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n\nconst Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\n\n\nwindow.addEventListener('DOMContentLoaded', () => {\n    new Game();\n})\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
