@@ -119,6 +119,17 @@ eval("module.exports = function(module) {\n\tif (!module.webpackPolyfill) {\n\t\
 
 /***/ }),
 
+/***/ "./src/ghost_canvas.js":
+/*!*****************************!*\
+  !*** ./src/ghost_canvas.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("// let xpos = 300;\n// let ypos = 300;\nlet xpos = getRandomInt(550);\nlet ypos = getRandomInt(350);\nlet velX = getRandomInt(5);\nlet velY = getRandomInt(5);\n\nfunction drawCircleGhost(xpos, ypos, radius){\n    let c = document.getElementById(\"game-canvas\");\n    let ctx = c.getContext('2d');\n    ctx.beginPath();\n    ctx.arc(xpos, ypos, radius, 0, 2 * Math.PI);\n    ctx.fill();\n    ctx.stroke();\n\n}\nfunction getRandomInt(max) {\n    return Math.floor(Math.random() * Math.floor(max));\n}\n\nfunction moveDirection(){\n    let radius = 10;\n    let c = document.getElementById(\"game-canvas\");\n    let ctx = c.getContext('2d');\n    ctx.clearRect(0, 0, 600, 400);\n    drawCircleGhost(xpos, ypos, radius);\n    // debugger\n    xpos += .05;\n    ypos += .05;\n    console.log(xpos);\n    console.log(ypos);\n    if (xpos + radius > 600 || xpos - radius < 0) {\n        velX *= -1;\n    }\n    if (ypos + radius > 400 || ypos - radius < 0) {\n        velY *= -1;\n    }\n    // moveDirection(xpos, ypos)\n    requestAnimationFrame(() => moveDirection());\n}\n\n\n\nmodule.exports = drawCircleGhost;\nmodule.exports = moveDirection;\n\n\n//# sourceURL=webpack:///./src/ghost_canvas.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -127,7 +138,7 @@ eval("module.exports = function(module) {\n\tif (!module.webpackPolyfill) {\n\t\
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n\n\nfunction component() {\n    let element = document.createElement('div');\n\n    element.innerHTML = lodash__WEBPACK_IMPORTED_MODULE_0___default.a.join(['Hello', 'webpack'], ' ');\n    return element;\n}\n\n\ndocument.body.appendChild(component());\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n\nconst drawCircleGhost = __webpack_require__(/*! ./ghost_canvas */ \"./src/ghost_canvas.js\");\nconst moveDirection = __webpack_require__(/*! ./ghost_canvas */ \"./src/ghost_canvas.js\")\nfunction getRandomInt(max) {\n    return Math.floor(Math.random() * Math.floor(max));\n}\n\nmoveDirection()\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 

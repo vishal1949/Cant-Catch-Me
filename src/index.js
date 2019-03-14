@@ -1,11 +1,8 @@
 import _ from 'lodash';
-
-function component() {
-    let element = document.createElement('div');
-
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-    return element;
+const drawCircleGhost = require('./ghost_canvas');
+const moveDirection = require('./ghost_canvas')
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
 }
 
-
-document.body.appendChild(component());
+moveDirection()
