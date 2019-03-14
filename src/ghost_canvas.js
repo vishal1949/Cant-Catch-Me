@@ -25,10 +25,10 @@ function moveDirection(){
     ctx.clearRect(0, 0, 600, 400);
     drawCircleGhost(xpos, ypos, radius);
     // debugger
-    xpos += .05;
-    ypos += .05;
-    console.log(xpos);
-    console.log(ypos);
+    xpos += velX;
+    ypos += velY;
+    // console.log(xpos);
+    // console.log(ypos);
     if (xpos + radius > 600 || xpos - radius < 0) {
         velX *= -1;
     }
