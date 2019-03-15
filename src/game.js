@@ -25,8 +25,13 @@ class Game {
         let g2 = new Ghost(ctx);
         let g3 = new Ghost(ctx);
 
-        let laser = new Laser('vertical');
-        let laser2 = new Laser('asdf'); //horizontal
+        this.startWidth = 0;
+        this.startHeight = 0;
+        this.width = 800;
+        this.height = 500;
+
+        let laser = new Laser('vertical', ctx);
+        let laser2 = new Laser('asdf', ctx); //horizontal
 
         let ghosts = [g, g2, g3];
         let lasers = [laser, laser2];
@@ -40,7 +45,7 @@ class Game {
     }
     drawGhost(ghostArray, laserArray) {
         requestAnimationFrame(() => {
-            ctx.clearRect(0, 0, 800, 500);
+            ctx.clearRect(this.startWidth, this.startHeight, this.width, this.height);
             this.drawGhost(ghostArray, laserArray)
         });
         for (let i = 0; i < ghostArray.length; i++) {
@@ -49,11 +54,9 @@ class Game {
         }
         for (let i = 0; i < laserArray.length; i++) {
             ctx.drawImage(laserArray[i].icon, laserArray[i].xpos, laserArray[i].ypos, 55, 40)
-            laserArray[i].move()
-
-
-            // key('keyup', () => laserArray[i].move('vertical'));
-            // key('left, right', () => laserArray[i].move('horizontal'))
+            laserArray[i].move();
+            laserArray[i].whichLaserShoots();
+            
         }
     }
     
