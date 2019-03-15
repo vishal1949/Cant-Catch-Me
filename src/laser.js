@@ -69,11 +69,13 @@ class Laser {
         if(direction !== 'vertical'){
             this.ctx.beginPath();
             this.ctx.moveTo(this.xpos + 29, this.ypos);
+            this.ctx.strokeStyle = "white";
             this.ctx.lineTo(this.xpos + 29, 0);
             this.ctx.stroke();
         }else if(direction === 'vertical') {
             this.ctx.beginPath();
             this.ctx.moveTo(this.xpos , this.ypos +20 ) ;
+            this.ctx.strokeStyle = "white";
             this.ctx.lineTo(0, this.ypos + 20);
             this.ctx.stroke();
         }
