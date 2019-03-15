@@ -8,8 +8,14 @@ class Ghost {
         this.icon.src = "img/ghost.jpg";
         this.xpos = getRandomInt(550);
         this.ypos = getRandomInt(350);
-        this.velX = getRandomInt(7);
-        this.velY = getRandomInt(7);
+        let v = getRandomInt(2)
+        if(v === 2){
+            this.velX = getRandomInt(7);
+            this.velY = getRandomInt(-7);
+        }else{
+            this.velX = getRandomInt(-7);
+            this.velY = getRandomInt(7);
+        }
         let r = getRandomInt(3);
         if(r === 1){
             this.radius = 20;
@@ -24,7 +30,6 @@ class Ghost {
 
     
     moveDirection() {
-        // let radius = 10;
         this.xpos += this.velX;
         this.ypos += this.velY;
         if (this.xpos + this.radius > 800 || this.xpos < 3) {

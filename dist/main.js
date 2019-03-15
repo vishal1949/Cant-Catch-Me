@@ -126,7 +126,7 @@ eval("module.exports = function(module) {\n\tif (!module.webpackPolyfill) {\n\t\
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Ghost = __webpack_require__(/*! ./ghosts */ \"./src/ghosts.js\");\nconst ctx = document.getElementById(\"game-canvas\").getContext('2d');\n\nclass Game {\n    constructor(){\n        let g = new Ghost(ctx);\n        let g2 = new Ghost(ctx);\n        let g3 = new Ghost(ctx);\n        let ghosts = [g, g2, g3];\n        this.drawGhost = this.drawGhost.bind(this);\n        this.drawGhost(ghosts)\n    }\n    drawGhost(ghostArray) {\n        requestAnimationFrame(() => {\n            ctx.clearRect(0, 0, 800, 500);\n            this.drawGhost(ghostArray)\n        });\n        for (let i = 0; i < ghostArray.length; i++) {\n            ctx.drawImage(ghostArray[i].icon, ghostArray[i].xpos, ghostArray[i].ypos, ghostArray[i].radius, ghostArray[i].radius )\n            ghostArray[i].moveDirection();\n        }\n    }\n}\n\nmodule.exports = Game;\n\n//# sourceURL=webpack:///./src/game.js?");
+eval("const Ghost = __webpack_require__(/*! ./ghosts */ \"./src/ghosts.js\");\nconst ctx = document.getElementById(\"game-canvas\").getContext('2d');\nconst Laser = __webpack_require__(/*! ./laser */ \"./src/laser.js\");\n\nclass Game {\n    constructor(){\n        let g = new Ghost(ctx);\n        let g2 = new Ghost(ctx);\n        let g3 = new Ghost(ctx);\n\n        let laser = new Laser('vertical');\n        let laser2 = new Laser('asdf');\n\n        let ghosts = [g, g2, g3];\n        let lasers = [laser, laser2];\n\n        this.drawGhost = this.drawGhost.bind(this);\n        // this.drawLaser = this.drawLaser.bind(this);\n\n        this.drawGhost(ghosts, lasers);\n        // this.drawLaser(lasers);\n        \n    }\n    drawGhost(ghostArray, laserArray) {\n        requestAnimationFrame(() => {\n            ctx.clearRect(0, 0, 800, 500);\n            this.drawGhost(ghostArray, laserArray)\n        });\n        for (let i = 0; i < ghostArray.length; i++) {\n            ctx.drawImage(ghostArray[i].icon, ghostArray[i].xpos, ghostArray[i].ypos, ghostArray[i].radius, ghostArray[i].radius )\n            ghostArray[i].moveDirection();\n        }\n        for (let i = 0; i < laserArray.length; i++) {\n            ctx.drawImage(laserArray[i].icon, laserArray[i].xpos, laserArray[i].ypos, 55, 40)\n        }\n    }\n}\n\nmodule.exports = Game;\n\n//# sourceURL=webpack:///./src/game.js?");
 
 /***/ }),
 
@@ -137,7 +137,7 @@ eval("const Ghost = __webpack_require__(/*! ./ghosts */ \"./src/ghosts.js\");\nc
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("function getRandomInt(max) {\n    return Math.floor(Math.random() * Math.floor(max)) + 1;\n}\n\nclass Ghost {\n    constructor(){\n        this.icon = new Image();\n        this.icon.src = \"img/ghost.jpg\";\n        this.xpos = getRandomInt(550);\n        this.ypos = getRandomInt(350);\n        this.velX = getRandomInt(7);\n        this.velY = getRandomInt(7);\n        let r = getRandomInt(3);\n        if(r === 1){\n            this.radius = 20;\n        }else if(r === 2){\n            this.radius = 35;\n        }else{\n            this.radius = 50;\n        }\n        this.ctx = document.getElementById(\"game-canvas\").getContext('2d');\n        this.moveDirection = this.moveDirection.bind(this);\n    }\n\n    \n    moveDirection() {\n        // let radius = 10;\n        this.xpos += this.velX;\n        this.ypos += this.velY;\n        if (this.xpos + this.radius > 800 || this.xpos < 3) {\n            this.velX *= -1;\n        }\n        if (this.ypos + this.radius > 500 || this.ypos < 3) {\n            this.velY *= -1;\n        }\n    }\n}\n\nmodule.exports = Ghost;\n\n \n\n//# sourceURL=webpack:///./src/ghosts.js?");
+eval("function getRandomInt(max) {\n    return Math.floor(Math.random() * Math.floor(max)) + 1;\n}\n\nclass Ghost {\n    constructor(){\n        this.icon = new Image();\n        this.icon.src = \"img/ghost.jpg\";\n        this.xpos = getRandomInt(550);\n        this.ypos = getRandomInt(350);\n        let v = getRandomInt(2)\n        if(v === 2){\n            this.velX = getRandomInt(7);\n            this.velY = getRandomInt(-7);\n        }else{\n            this.velX = getRandomInt(-7);\n            this.velY = getRandomInt(7);\n        }\n        let r = getRandomInt(3);\n        if(r === 1){\n            this.radius = 20;\n        }else if(r === 2){\n            this.radius = 35;\n        }else{\n            this.radius = 50;\n        }\n        this.ctx = document.getElementById(\"game-canvas\").getContext('2d');\n        this.moveDirection = this.moveDirection.bind(this);\n    }\n\n    \n    moveDirection() {\n        this.xpos += this.velX;\n        this.ypos += this.velY;\n        if (this.xpos + this.radius > 800 || this.xpos < 3) {\n            this.velX *= -1;\n        }\n        if (this.ypos + this.radius > 500 || this.ypos < 3) {\n            this.velY *= -1;\n        }\n    }\n}\n\nmodule.exports = Ghost;\n\n \n\n//# sourceURL=webpack:///./src/ghosts.js?");
 
 /***/ }),
 
@@ -149,7 +149,18 @@ eval("function getRandomInt(max) {\n    return Math.floor(Math.random() * Math.f
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n\nconst Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\n\n\nwindow.addEventListener('DOMContentLoaded', () => {\n    new Game();\n})\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n\nconst Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\n\n\nwindow.addEventListener('DOMContentLoaded', () => {\n    new Game();\n})\n\nwindow.addEventListener('keydown', (e) =>check(e), false);\n\n// let check = (e) => {\n//     let code = e.keyCode;\n//     switch (code) {\n//         case 37: alert(\"Left\"); break; //Left key\n//         case 38: alert(\"Up\"); break; //Up key\n//         case 39: alert(\"Right\"); break; //Right key\n//         case 40: alert(\"Down\"); break; //Down key\n//         default: alert(code); //Everything else\n//     }\n// }\n\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/laser.js":
+/*!**********************!*\
+  !*** ./src/laser.js ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("\n\nclass Laser {\n    constructor(direction){\n        \n        this.icon = new Image();\n        if(direction === 'vertical'){\n            this.icon.src = \"img/sidwaysarrow.jpg\";\n            this.xpos = 775;\n            this.ypos = 460;\n        }else{\n            this.icon.src = \"img/arrow.png\";\n            this.xpos = 750;\n            this.ypos = 480;\n        }\n    }\n}\n\nmodule.exports = Laser;\n\n//# sourceURL=webpack:///./src/laser.js?");
 
 /***/ })
 
