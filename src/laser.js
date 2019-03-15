@@ -1,9 +1,11 @@
-
+const Line = require('./line')
 
 class Laser {
     constructor(direction, ctx){
         this.ctx = ctx;
         this.icon = new Image();
+        this.line = [];
+        this.laserArray = [];
         if(direction === 'vertical'){
             this.direction = 'vertical'
             this.icon.src = "img/sidwaysarrow.jpg";
@@ -16,11 +18,12 @@ class Laser {
             this.ypos = 480;
         }
 
+        this.drawLaser = this.drawLaser.bind(this)
         this.move = this.move.bind(this);
         this.moveHorizontal = this.moveHorizontal.bind(this);
         this.moveVertical = this.moveVertical.bind(this);
         this.shootLaser = this.shootLaser.bind(this);
-        this.drawLaser = this.drawLaser.bind(this);
+        this.populateLaserArray = this.populateLaserArray.bind(this);
         this.whichLaserShoots = this.whichLaserShoots.bind(this);
     }
 
@@ -59,25 +62,20 @@ class Laser {
 
     shootLaser(direction){
         if (window.keysdown[75] || window.keysdown[90]){ // k or z
-            this.drawLaser(direction);
+            this.populateLaserArray(direction);
         } else if (window.keysdown[76] || window.keysdown[88]){ //L or x
-            this.drawLaser(direction);
+            this.populateLaserArray(direction);
         }
     }
 
-    drawLaser(direction){
-        if(direction !== 'vertical'){
-            this.ctx.beginPath();
-            this.ctx.moveTo(this.xpos + 29, this.ypos);
-            this.ctx.strokeStyle = "white";
-            this.ctx.lineTo(this.xpos + 29, 0);
-            this.ctx.stroke();
-        }else if(direction === 'vertical') {
-            this.ctx.beginPath();
-            this.ctx.moveTo(this.xpos , this.ypos +20 ) ;
-            this.ctx.strokeStyle = "white";
-            this.ctx.lineTo(0, this.ypos + 20);
-            this.ctx.stroke();
+    populateLaserArray(direction){
+        this.laserArray.push(new Line(this.xpos, this.ypos, direction, this.ctx));
+        this.drawLaser();
+    }
+
+    drawLaser(){
+        for(let i = 0; i < this.laserArray.length; i++){
+            this.laserArray[i].drawLine();
         }
     }
 }

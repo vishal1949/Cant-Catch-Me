@@ -28,15 +28,17 @@ class Game {
 
         this.drawGhost = this.drawGhost.bind(this);
         this.drawLaser = this.drawLaser.bind(this);
-        this.drawGhost(ghosts); // , lasers
+        this.drawGhost(ghosts);
         
     }
 
-    drawGhost(ghostArray) { //, laserArray
+    drawGhost(ghostArray) {
         requestAnimationFrame(() => {
             ctx.clearRect(this.startWidth, this.startHeight, this.width, this.height);
-            this.drawGhost(ghostArray) //, laserArray
-            this.drawLaser(this.lasers)
+            this.drawGhost(ghostArray);
+            this.drawLaser(this.lasers);
+            if (this.lasers[0].laserArray.length > 0) this.lasers[0].drawLaser();
+            if (this.lasers[1].laserArray.length > 0) this.lasers[1].drawLaser();
         });
         for (let i = 0; i < ghostArray.length; i++) {
             ctx.drawImage(ghostArray[i].icon, ghostArray[i].xpos, ghostArray[i].ypos, ghostArray[i].radius, ghostArray[i].radius )
@@ -51,7 +53,6 @@ class Game {
             laserArray[i].whichLaserShoots();
         }
     }
-    
 }
 
 module.exports = Game;
