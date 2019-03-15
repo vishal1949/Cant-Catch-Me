@@ -32,10 +32,10 @@ class Ghost {
     moveDirection() {
         this.xpos += this.velX;
         this.ypos += this.velY;
-        if (this.xpos + this.radius > 800 || this.xpos < 3) {
+        if (this.xpos + this.radius > 778 || this.xpos < 3) {
             this.velX *= -1;
         }
-        if (this.ypos + this.radius > 500 || this.ypos < 3) {
+        if (this.ypos + this.radius > 482 || this.ypos < 3) {
             this.velY *= -1;
         }
     }

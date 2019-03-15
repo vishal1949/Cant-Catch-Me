@@ -2,6 +2,20 @@ const Ghost = require('./ghosts');
 const ctx = document.getElementById("game-canvas").getContext('2d');
 const Laser = require('./laser');
 
+window.addEventListener('keydown', (e) => check(e), false);
+
+let check = (e) => {
+    let code = e.keyCode;
+    switch (code) {
+        case 37: alert("Left"); break; //Left key
+        case 38: alert("Up"); break; //Up key
+        case 39: alert("Right"); break; //Right key
+        case 40: alert("Down"); break; //Down key
+        default: return null; //Everything else
+    }
+}
+
+
 class Game {
     constructor(){
         let g = new Ghost(ctx);
@@ -34,6 +48,7 @@ class Game {
             ctx.drawImage(laserArray[i].icon, laserArray[i].xpos, laserArray[i].ypos, 55, 40)
         }
     }
+    
 }
 
 module.exports = Game;
