@@ -22,29 +22,36 @@ class Laser {
         this.move()
     }
 
-    move(direction){
-        switch(direction){
-            case 'vertical': moveVertical();
-            case 'horizontal': moveHorizontal();
-            default: return null;
+    move(){
+        switch(this.direction){
+            case 'vertical': 
+                this.moveVertical(); break;
+            case 'horizontal': this.moveHorizontal(); break;
+            default: return null; 
         }
     }
 
     moveHorizontal(){
-        if (key.left) { //&& this.xpos > 0
+        if (window.keysdown[37] || window.keysdown[65] ) { //&& this.xpos > 0
             this.xpos -= 5;
-        }else{
+        } else if (window.keysdown[39] ||  window.keysdown[68]){
             this.xpos +=5
         }
+        console.log(`horizontal xpos: ${this.xpos}`)
         //does soemthing
     }
 
     moveVertical(){
-        if (key.down) { //&& this.xpos > 0
+        if (window.keysdown[38] || window.keysdown[87]) { //&& this.xpos > 0
             this.ypos -= 5;
-        } else {
+        } else if (window.keysdown[40] || window.keysdown[83]) {
             this.ypos += 5
         }
+        console.log(`vertical xpos: ${this.ypos}`)
+    }
+
+    shootLaser(){
+        
     }
 }
 

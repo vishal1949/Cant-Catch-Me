@@ -2,18 +2,21 @@ const Ghost = require('./ghosts');
 const ctx = document.getElementById("game-canvas").getContext('2d');
 const Laser = require('./laser');
 
-window.addEventListener('keydown', (e) => check(e), false);
+// window.addEventListener('keydown', (e) => check(e), false);
 
-let check = (e) => {
-    let code = e.keyCode;
-    switch (code) {
-        case 37: alert("Left"); break; //Left key
-        case 38: alert("Up"); break; //Up key
-        case 39: alert("Right"); break; //Right key
-        case 40: alert("Down"); break; //Down key
-        default: return null; //Everything else
-    }
-}
+// let check = (e) => {
+//     let code = e.keyCode;
+//     switch (code) {
+//         case 37: alert("Left"); break; //Left key
+//         case 38: alert("Up"); break; //Up key
+//         case 39: alert("Right"); break; //Right key
+//         case 40: alert("Down"); break; //Down key
+//         default: return null; //Everything else
+//     }
+// }
+
+
+
 
 
 class Game {
@@ -23,7 +26,7 @@ class Game {
         let g3 = new Ghost(ctx);
 
         let laser = new Laser('vertical');
-        let laser2 = new Laser('asdf');
+        let laser2 = new Laser('asdf'); //horizontal
 
         let ghosts = [g, g2, g3];
         let lasers = [laser, laser2];
@@ -46,6 +49,11 @@ class Game {
         }
         for (let i = 0; i < laserArray.length; i++) {
             ctx.drawImage(laserArray[i].icon, laserArray[i].xpos, laserArray[i].ypos, 55, 40)
+            laserArray[i].move()
+
+
+            // key('keyup', () => laserArray[i].move('vertical'));
+            // key('left, right', () => laserArray[i].move('horizontal'))
         }
     }
     
