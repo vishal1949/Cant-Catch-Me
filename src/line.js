@@ -41,7 +41,12 @@ class Line {
     }
 
     returnValues(){
-        return{}
+        return{
+            startWidth: this.lastPosX,
+            maxWidth: this.xpos, //772
+            startHeight: this.lastPosY, //3
+            maxHeight: this.ypos, //482
+        }
     }
 }
 
