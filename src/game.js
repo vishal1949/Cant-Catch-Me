@@ -10,15 +10,16 @@ class Game {
         this.width = 800;
         this.height = 500;
         this.dimensions = {
-            [this.startHeight]: this.startHeight, 
-            [this.startWidth]: this.startWidth,
-            [this.width]: this.width,
-            [this.height]: this.height,
+            startWidth: this.startWidth+3, //3
+            maxWidth: this.width-28, //772
+            startHeight: this.startHeight+3, //3
+            maxHeight: this.height-18, //482
         }
 
-        let g = new Ghost(ctx);
-        let g2 = new Ghost(ctx);
-        let g3 = new Ghost(ctx);
+        let g = new Ghost(this.dimensions);
+        let g2 = new Ghost(this.dimensions);
+        let g3 = new Ghost(this.dimensions);
+
 
         let laser = new Laser('vertical', ctx);
         let laser2 = new Laser('asdf', ctx); //horizontal
@@ -43,6 +44,15 @@ class Game {
         for (let i = 0; i < ghostArray.length; i++) {
             ctx.drawImage(ghostArray[i].icon, ghostArray[i].xpos, ghostArray[i].ypos, ghostArray[i].radius, ghostArray[i].radius )
             ghostArray[i].moveDirection();
+            ghostArray[i].dimensions = this.dimensions
+            // if(i === 2){
+            //     ghostArray[i].dimensions = {
+            //         startWidth: 50, //3
+            //         maxWidth: 600, //772
+            //         startHeight: 50, //3
+            //         maxHeight: 400, //482
+            //     }
+            // }
         }
     }
 
@@ -51,6 +61,8 @@ class Game {
             ctx.drawImage(laserArray[i].icon, laserArray[i].xpos, laserArray[i].ypos, 55, 40)
             laserArray[i].move();
             laserArray[i].whichLaserShoots();
+
+            
         }
     }
 }

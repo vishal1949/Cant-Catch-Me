@@ -10,7 +10,7 @@ class Laser {
             this.direction = 'vertical'
             this.icon.src = "img/sidwaysarrow.jpg";
             this.xpos = 775;
-            this.ypos = 460;
+            this.ypos = 465;
         }else{
             this.direction = 'horizontal'
             this.icon.src = "img/arrow.png";

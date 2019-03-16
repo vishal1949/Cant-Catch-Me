@@ -3,11 +3,12 @@ function getRandomInt(max) {
 }
 
 class Ghost {
-    constructor(){
+    constructor(dimensions){
         this.icon = new Image();
         this.icon.src = "img/ghost.jpg";
         this.xpos = getRandomInt(550);
         this.ypos = getRandomInt(350);
+        this.dimensions = dimensions;
         let v = getRandomInt(2)
         if(v === 2){
             this.velX = getRandomInt(7);
@@ -32,15 +33,16 @@ class Ghost {
     moveDirection() {
         this.xpos += this.velX;
         this.ypos += this.velY;
-        if (this.xpos + this.radius > 778 || this.xpos < 3) {
+        if((this.xpos + this.radius) > this.dimensions.maxWidth || this.xpos < this.dimensions.startWidth){
             this.velX *= -1;
         }
-        if (this.ypos + this.radius > 482 || this.ypos < 3) {
+        if((this.ypos + this.radius) > this.dimensions.maxHeight || this.ypos < this.dimensions.startHeight){
             this.velY *= -1;
         }
     }
 }
 
 module.exports = Ghost;
+
 
  
