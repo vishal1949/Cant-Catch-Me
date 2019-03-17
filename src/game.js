@@ -30,6 +30,8 @@ class Game {
         this.drawGhost = this.drawGhost.bind(this);
         this.drawLaser = this.drawLaser.bind(this);
         this.updateDimensions = this.updateDimensions.bind(this);
+        this.gameOver = this.gameOver.bind(this);
+        this.areaCalculator = this.areaCalculator.bind(this);
 
         this.drawGhost(ghosts);
         
@@ -45,6 +47,19 @@ class Game {
         
     }
 
+    areaCalculator(){
+        let area;
+        area = this.dimensions.maxHeight * this.dimensions.maxWidth;
+        return area;
+    }
+
+    gameOver(){
+        let area = this.areaCalculator();
+        if(area < 15000){
+            alert("YOU WIN!")
+        }
+    }
+
     drawGhost(ghostArray) {
         requestAnimationFrame(() => {
             ctx.clearRect(this.startWidth, this.startHeight, this.width, this.height);
@@ -52,6 +67,8 @@ class Game {
             this.drawLaser(this.lasers);
             if (this.lasers[0].laserArray.length > 0) this.lasers[0].drawLaser();
             if (this.lasers[1].laserArray.length > 0) this.lasers[1].drawLaser();
+            console.log(this.dimensions)
+            this.gameOver();
         });
         for (let i = 0; i < ghostArray.length; i++) {
             ctx.drawImage(ghostArray[i].icon, ghostArray[i].xpos, ghostArray[i].ypos, ghostArray[i].radius, ghostArray[i].radius )
@@ -70,7 +87,6 @@ class Game {
                 // this.updateDimensions(lasers[0].laserArray[lasers[0].laserArray.length - 1].returnValues())
                 let newDimension = lasers[0].laserArray[lasers[0].laserArray.length - 1].returnValues();
                 console.log(this.dimensions);
-                debugger
                 if (this.dimensions.maxHeight > newDimension.maxHeight) {
                     this.dimensions.maxHeight = newDimension.maxHeight;
                     console.log(this.dimensions);
