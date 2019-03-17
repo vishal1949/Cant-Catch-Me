@@ -11,11 +11,11 @@ class Ghost {
         this.dimensions = dimensions;
         let v = getRandomInt(2)
         if(v === 2){
-            this.velX = getRandomInt(7);
-            this.velY = getRandomInt(-7);
+            this.velX = 7
+            this.velY = -7;
         }else{
-            this.velX = getRandomInt(-7);
-            this.velY = getRandomInt(7);
+            this.velX = -6;
+            this.velY = 7;
         }
         let r = getRandomInt(3);
         if(r === 1){

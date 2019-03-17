@@ -53,11 +53,14 @@ class Laser {
     }
 
     whichLaserShoots(){
+        let returnval;
+        // debugger
         if (75 in window.keysdown || 90 in window.keysdown) {
-            this.shootLaser('horizontal');
+            returnval = this.shootLaser('horizontal');
         } else if (76 in window.keysdown || 88 in window.keysdown) {
-            this.shootLaser('vertical');
+           returnval = this.shootLaser('vertical');
         }
+        return returnval;
     }
 
     shootLaser(direction){
@@ -65,6 +68,12 @@ class Laser {
             this.populateLaserArray(direction);
         } else if (window.keysdown[76] || window.keysdown[88]){ //L or x
             this.populateLaserArray(direction);
+        }
+        if(direction === 'vertical'){
+            debugger
+            return 'vertical';
+        }else if(direction ==='horizontal'){
+            return 'horizontal';
         }
     }
 

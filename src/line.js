@@ -13,9 +13,9 @@ class Line {
 
     drawLine(){
         if (this.direction === 'horizontal') { //draws line vertical
-            this.ctx.beginPath();
+            this.ctx.beginPath(); // change xpos
             this.ctx.moveTo(this.xpos + 29, this.ypos + 2);
-            this.ctx.strokeStyle = "black";
+            this.ctx.strokeStyle = "white";
             this.ctx.lineWidth = "3";
             this.ctx.lineTo(this.xpos + 29, this.finalY);
             this.ctx.stroke();
@@ -26,9 +26,9 @@ class Line {
                 this.lastPosY = this.finalY;
             }
         } else if (this.direction === 'vertical') { //draws line horizontal 
-            this.ctx.beginPath();
+            this.ctx.beginPath(); //change ypos
             this.ctx.moveTo(this.xpos+3, this.ypos + 20);
-            this.ctx.strokeStyle = "black";
+            this.ctx.strokeStyle = "white";
             this.ctx.lineWidth = "3";
             this.ctx.lineTo(this.finalX, this.ypos + 20);
             this.ctx.stroke();
@@ -43,8 +43,8 @@ class Line {
     returnValues(){
         return{
             startWidth: this.lastPosX,
-            maxWidth: this.xpos, //772
             startHeight: this.lastPosY, //3
+            maxWidth: this.xpos, //772
             maxHeight: this.ypos, //482
         }
     }

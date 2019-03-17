@@ -22,7 +22,7 @@ class Game {
 
 
         let laser = new Laser('vertical', ctx);
-        let laser2 = new Laser('asdf', ctx); //horizontal
+        let laser2 = new Laser('horizontal', ctx); //horizontal
 
         let ghosts = [g, g2, g3];
         this.lasers = [laser, laser2];
@@ -44,7 +44,7 @@ class Game {
         for (let i = 0; i < ghostArray.length; i++) {
             ctx.drawImage(ghostArray[i].icon, ghostArray[i].xpos, ghostArray[i].ypos, ghostArray[i].radius, ghostArray[i].radius )
             ghostArray[i].moveDirection();
-            ghostArray[i].dimensions = this.dimensions
+            ghostArray[i].dimensions = this.dimensions;
             // if(i === 2){
             //     ghostArray[i].dimensions = {
             //         startWidth: 50, //3
@@ -56,12 +56,23 @@ class Game {
         }
     }
 
-    drawLaser(laserArray){
-        for (let i = 0; i < laserArray.length; i++) {
-            ctx.drawImage(laserArray[i].icon, laserArray[i].xpos, laserArray[i].ypos, 55, 40)
-            laserArray[i].move();
-            laserArray[i].whichLaserShoots();
-
+    drawLaser(lasers){
+        for (let i = 0; i < lasers.length; i++) {
+            ctx.drawImage(lasers[i].icon, lasers[i].xpos, lasers[i].ypos, 55, 40)
+            lasers[i].move();
+            let laserDirection = lasers[i].whichLaserShoots();
+            // debugger
+            console.log(this.dimensions)
+            if (laserDirection === 'vertical'){
+                this.dimensions = lasers[0].laserArray[lasers[0].laserArray.length - 1].returnValues();
+            } else if(laserDirection === 'horizontal'){
+                this.dimensions = lasers[1].laserArray[lasers[1].laserArray.length - 1].returnValues();
+            }
+            // if(lasers[i].laserArray.length > 1) {
+            //     // debugger
+            //     this.dimensions = lasers[i].laserArray[lasers[i].laserArray.length-1].returnValues();
+            //     console.log(this.dimensions);
+            // }
             
         }
     }
