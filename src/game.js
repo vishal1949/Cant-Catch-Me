@@ -61,8 +61,8 @@ class Game {
             ctx.drawImage(laserArray[i].icon, laserArray[i].xpos, laserArray[i].ypos, 55, 40)
             laserArray[i].move();
             laserArray[i].whichLaserShoots();
-
-            
+            if(laserArray.length > 0) this.dimensions = laserArray[i].laserArray[laserArray.length-1].returnValues();
+            debugger
         }
     }
 }

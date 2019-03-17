@@ -9,6 +9,7 @@ class Line {
         this.finalY = this.ypos; //Used for animating line
         this.finalX = this.xpos; //Used for animating line
         this.drawLine = this.drawLine.bind(this);
+        this.returnValues = this.returnValues.bind(this);
     }
 
     drawLine(){
