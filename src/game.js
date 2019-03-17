@@ -11,8 +11,8 @@ class Game {
         this.height = 500;
         this.dimensions = {
             startWidth: this.startWidth+3, //3
-            maxWidth: this.width-28, //772
             startHeight: this.startHeight+3, //3
+            maxWidth: this.width-28, //772
             maxHeight: this.height-18, //482
         }
 
@@ -29,7 +29,19 @@ class Game {
 
         this.drawGhost = this.drawGhost.bind(this);
         this.drawLaser = this.drawLaser.bind(this);
+        this.updateDimensions = this.updateDimensions.bind(this);
+
         this.drawGhost(ghosts);
+        
+    }
+
+    updateDimensions(newDimension){
+        if(this.dimensions[maxHeight] < newDimension[maxHeight]){
+            this.dimensions[maxHeight] = newDimension[maxHeight];
+        }
+        if(this.dimensions[maxWidth] < newDimension[maxWidth]){
+            this.dimensions[maxWidth] = newDimension[maxWidth];
+        }
         
     }
 
@@ -45,14 +57,6 @@ class Game {
             ctx.drawImage(ghostArray[i].icon, ghostArray[i].xpos, ghostArray[i].ypos, ghostArray[i].radius, ghostArray[i].radius )
             ghostArray[i].moveDirection();
             ghostArray[i].dimensions = this.dimensions;
-            // if(i === 2){
-            //     ghostArray[i].dimensions = {
-            //         startWidth: 50, //3
-            //         maxWidth: 600, //772
-            //         startHeight: 50, //3
-            //         maxHeight: 400, //482
-            //     }
-            // }
         }
     }
 
@@ -62,18 +66,22 @@ class Game {
             lasers[i].move();
             let laserDirection = lasers[i].whichLaserShoots();
             // debugger
-            console.log(this.dimensions)
             if (laserDirection === 'vertical'){
-                this.dimensions = lasers[0].laserArray[lasers[0].laserArray.length - 1].returnValues();
+                // this.updateDimensions(lasers[0].laserArray[lasers[0].laserArray.length - 1].returnValues())
+                let newDimension = lasers[0].laserArray[lasers[0].laserArray.length - 1].returnValues();
+                console.log(this.dimensions);
+                debugger
+                if (this.dimensions.maxHeight > newDimension.maxHeight) {
+                    this.dimensions.maxHeight = newDimension.maxHeight;
+                    console.log(this.dimensions);
+                }
             } else if(laserDirection === 'horizontal'){
-                this.dimensions = lasers[1].laserArray[lasers[1].laserArray.length - 1].returnValues();
+                // this.updateDimensions(lasers[1].laserArray[lasers[1].laserArray.length - 1].returnValues())
+                let newDimension = lasers[1].laserArray[lasers[1].laserArray.length - 1].returnValues();
+                if (this.dimensions.maxWidth > newDimension.maxWidth) {
+                    this.dimensions.maxWidth = newDimension.maxWidth;
+                }
             }
-            // if(lasers[i].laserArray.length > 1) {
-            //     // debugger
-            //     this.dimensions = lasers[i].laserArray[lasers[i].laserArray.length-1].returnValues();
-            //     console.log(this.dimensions);
-            // }
-            
         }
     }
 }

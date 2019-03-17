@@ -70,7 +70,6 @@ class Laser {
             this.populateLaserArray(direction);
         }
         if(direction === 'vertical'){
-            debugger
             return 'vertical';
         }else if(direction ==='horizontal'){
             return 'horizontal';
