@@ -14,6 +14,8 @@ class Game {
             maxWidth: this.width-28, //772
             maxHeight: this.height-18, //482
         }
+        this.winner = false;
+        this.ghostCount = 0; //num ghosts outside bounds
 
         let g = new Ghost(this.dimensions);
         let g2 = new Ghost(this.dimensions);
@@ -30,9 +32,24 @@ class Game {
         this.drawLaser = this.drawLaser.bind(this);
         this.gameOver = this.gameOver.bind(this);
         this.areaCalculator = this.areaCalculator.bind(this);
+        this.locateGhost = this.locateGhost.bind(this);
 
         this.drawGhost(this.ghosts);
         
+    }
+
+    locateGhost(){
+
+        for(let i = 0; i < this.ghosts.length; i++){
+            if(this.ghosts[i].xpos > this.dimensions.maxWidth){
+                this.ghosts[i].xpos = 1000;
+                // this.ghostCount++;
+            }
+            if(this.ghosts[i].ypos > this.dimensions.maxWidth){
+                this.ghosts.ypos = 1000;
+                // this.ghostCount++;
+            }
+        }
     }
 
 
@@ -45,11 +62,13 @@ class Game {
     gameOver(){
         let area = this.areaCalculator();
         if(area < 15000){
-            alert("YOU WIN!")
+            alert("YOU WIN!");
+            this.winner = true;
         }
     }
 
     drawGhost(ghostArray) {
+        if (this.winner === true) return null;
         requestAnimationFrame(() => {
             ctx.clearRect(this.startWidth, this.startHeight, this.width, this.height);
             this.drawGhost(ghostArray);
@@ -58,6 +77,8 @@ class Game {
             if (this.lasers[1].laserArray.length > 0) this.lasers[1].drawLaser();
             (this.dimensions)
             this.gameOver();
+            this.locateGhost();
+            
         });
         for (let i = 0; i < ghostArray.length; i++) {
             ctx.drawImage(ghostArray[i].icon, ghostArray[i].xpos, ghostArray[i].ypos, ghostArray[i].radius, ghostArray[i].radius )
