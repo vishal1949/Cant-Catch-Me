@@ -20,7 +20,6 @@ class Game {
         let g2 = new Ghost(this.dimensions);
         let g3 = new Ghost(this.dimensions);
 
-
         let laser = new Laser('vertical', ctx);
         let laser2 = new Laser('horizontal', ctx); //horizontal
 
@@ -38,7 +37,6 @@ class Game {
         
     }
 
-
     locateGhost(){
         for(let i = 0; i < this.ghosts.length; i++){
             if(this.ghosts[i].xpos > this.dimensions.maxWidth){
@@ -49,7 +47,6 @@ class Game {
             }
         }
     }
-
 
     areaCalculator(){
         let area;
@@ -76,12 +73,12 @@ class Game {
     }
 
     wait(time) { //in seconds
-    var start = new Date().getTime();
-    var end = start;
-    while (end < start + time) {
-        end = new Date().getTime();
-    }
-}
+        var start = new Date().getTime();
+        var end = start;
+        while (end < start + time) {
+            end = new Date().getTime();
+        }
+    }   
 
     drawGhost(ghostArray) {
         if (this.winner === true || this.winner === false) return null;
@@ -107,7 +104,6 @@ class Game {
             ctx.drawImage(lasers[i].icon, lasers[i].xpos, lasers[i].ypos, 55, 40)
             lasers[i].move();
             let laserDirection = lasers[i].whichLaserShoots();
-            // debugger
             if (laserDirection === 'vertical'){
                 let newDimension = lasers[0].laserArray[lasers[0].laserArray.length - 1].returnValues();
                 if (this.dimensions.maxHeight > newDimension.maxHeight) {
