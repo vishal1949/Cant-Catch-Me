@@ -23,7 +23,7 @@ class Game {
         let laser = new Laser('vertical', ctx);
         let laser2 = new Laser('horizontal', ctx); //horizontal
 
-        let ghosts = [g, g2, g3];
+        this.ghosts = [g, g2, g3];
         this.lasers = [laser, laser2];
 
         this.drawGhost = this.drawGhost.bind(this);
@@ -31,7 +31,7 @@ class Game {
         this.gameOver = this.gameOver.bind(this);
         this.areaCalculator = this.areaCalculator.bind(this);
 
-        this.drawGhost(ghosts);
+        this.drawGhost(this.ghosts);
         
     }
 
@@ -75,14 +75,14 @@ class Game {
             if (laserDirection === 'vertical'){
                 let newDimension = lasers[0].laserArray[lasers[0].laserArray.length - 1].returnValues();
                 if (this.dimensions.maxHeight > newDimension.maxHeight) {
-                    this.dimensions.maxHeight = newDimension.maxHeight;
+                    this.dimensions.maxHeight = newDimension.maxHeight+20;
                 }
             } else if(laserDirection === 'horizontal'){
                 let newDimension;
                 if (lasers[1].laserArray[lasers[1].laserArray.length - 1] !== undefined){
                     newDimension = lasers[1].laserArray[lasers[1].laserArray.length - 1].returnValues();
                     if (this.dimensions.maxWidth > newDimension.maxWidth) {
-                        this.dimensions.maxWidth = newDimension.maxWidth;
+                        this.dimensions.maxWidth = newDimension.maxWidth+25;
                     }
                 }
             }
