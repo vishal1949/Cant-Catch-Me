@@ -39,11 +39,9 @@ class Game {
 
     locateGhost(){
         for(let i = 0; i < this.ghosts.length; i++){
-            if(this.ghosts[i].xpos > this.dimensions.maxWidth){
+            if (this.ghosts[i].xpos >= this.dimensions.maxWidth - 10|| this.ghosts[i].ypos >= this.dimensions.maxHeight - 10) {
                 this.ghosts[i].xpos = 1000;
-            }
-            if(this.ghosts[i].ypos > this.dimensions.maxWidth){
-                this.ghosts.ypos = 1000;
+                this.ghosts[i].xpos = 1000;
             }
         }
     }
@@ -90,6 +88,12 @@ class Game {
             if (this.lasers[1].laserArray.length > 0) this.lasers[1].drawLaser();
             this.gameOver();
             this.locateGhost();
+            for(let i = 0; i < this.ghosts.length; i++){
+                if (this.ghosts[i].xpos >= this.dimensions.maxWidth || this.ghosts[i].ypos >= this.dimensions.maxHeight){
+                    this.ghosts[i].xpos = 1000;
+                    this.ghosts[i].xpos = 1000;
+                }
+            }
             
         });
         for (let i = 0; i < ghostArray.length; i++) {
