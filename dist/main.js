@@ -149,7 +149,7 @@ eval("function getRandomInt(max) {\n    return Math.floor(Math.random() * Math.f
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n\nconst Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\n\nwindow.addEventListener('DOMContentLoaded', () => {\n    window.keysdown = {};\n    new Game();\n    addEventListener(\"keydown\", function (e) { keysdown[e.keyCode] = true })\n    addEventListener(\"keyup\", function (e) { delete keysdown[e.keyCode] })\n\n    \n})\n\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n\nconst Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\n\nwindow.addEventListener('DOMContentLoaded', () => {\n    window.keysdown = {};\n    new Game();\n    addEventListener(\"keydown\", function (e) { keysdown[e.keyCode] = true })\n    addEventListener(\"keyup\", function (e) { delete keysdown[e.keyCode] })\n})\n\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
