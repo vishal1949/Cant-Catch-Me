@@ -4,7 +4,6 @@ const Laser = require('./laser');
 
 class Game {
     constructor(){
-
         this.startWidth = 0;
         this.startHeight = 0;
         this.width = 800;
@@ -79,9 +78,12 @@ class Game {
                     this.dimensions.maxHeight = newDimension.maxHeight;
                 }
             } else if(laserDirection === 'horizontal'){
-                let newDimension = lasers[1].laserArray[lasers[1].laserArray.length - 1].returnValues();
-                if (this.dimensions.maxWidth > newDimension.maxWidth) {
-                    this.dimensions.maxWidth = newDimension.maxWidth;
+                let newDimension;
+                if (lasers[1].laserArray[lasers[1].laserArray.length - 1] !== undefined){
+                    newDimension = lasers[1].laserArray[lasers[1].laserArray.length - 1].returnValues();
+                    if (this.dimensions.maxWidth > newDimension.maxWidth) {
+                        this.dimensions.maxWidth = newDimension.maxWidth;
+                    }
                 }
             }
         }
