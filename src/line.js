@@ -16,7 +16,7 @@ class Line {
             this.ctx.beginPath(); // change xpos
             this.ctx.moveTo(this.xpos + 29, this.ypos + 2);
             this.ctx.strokeStyle = "white";
-            this.ctx.lineWidth = "3";
+            this.ctx.lineWidth = "1";
             this.ctx.lineTo(this.xpos + 29, this.finalY);
             this.ctx.stroke();
             this.ctx.closePath();
@@ -29,7 +29,7 @@ class Line {
             this.ctx.beginPath(); //change ypos
             this.ctx.moveTo(this.xpos+3, this.ypos + 20);
             this.ctx.strokeStyle = "white";
-            this.ctx.lineWidth = "3";
+            this.ctx.lineWidth = "1";
             this.ctx.lineTo(this.finalX, this.ypos + 20);
             this.ctx.stroke();
             if (this.finalX > this.lastPosX){
