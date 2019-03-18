@@ -32,6 +32,7 @@ class Game {
         this.gameOver = this.gameOver.bind(this);
         this.areaCalculator = this.areaCalculator.bind(this);
         this.locateGhost = this.locateGhost.bind(this);
+        this.wait = this.wait.bind(this);
 
         this.drawGhost(this.ghosts);
         
@@ -65,13 +66,22 @@ class Game {
         ){
             alert('YOU LOSE');
             this.winner = false;
-            }
+        }
         if(area < 15000){
+            this.wait(2000);
             alert("YOU WIN!");
             this.winner = true;
         } 
         
     }
+
+    wait(time) { //in seconds
+    var start = new Date().getTime();
+    var end = start;
+    while (end < start + time) {
+        end = new Date().getTime();
+    }
+}
 
     drawGhost(ghostArray) {
         if (this.winner === true || this.winner === false) return null;
@@ -81,7 +91,6 @@ class Game {
             this.drawLaser(this.lasers);
             if (this.lasers[0].laserArray.length > 0) this.lasers[0].drawLaser();
             if (this.lasers[1].laserArray.length > 0) this.lasers[1].drawLaser();
-            (this.dimensions)
             this.gameOver();
             this.locateGhost();
             
