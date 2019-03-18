@@ -64,12 +64,12 @@ class Game {
             (this.ghosts[1].xpos >= 950 || this.ghosts[1].ypos >= 950) &&
             (this.ghosts[2].xpos >= 950 || this.ghosts[2].ypos >= 950)
         ){
-            alert('YOU LOSE');
+            alert(`YOU LOSE! Better luck next time. Your score is ${this.areaCalculator()}`);
             this.winner = false;
         }
         if(area < 15000){
             this.wait(2000);
-            alert("YOU WIN!");
+            alert(`YOU WIN! Your score is ${this.areaCalculator()}`);
             this.winner = true;
         } 
         

@@ -5,13 +5,69 @@
     <meta charset="utf-8" />
         <title>Can't Catch Me</title>
         <style type="text/css">
+            body{
+                background: black;
+            }
+            h1{
+                font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+                text-align: center;
+                padding: 20px;
+                background: black;
+                color: purple;
+                /* width: 100%; */
+                font-size: 40px;
+            }
             canvas {
                 border: 1px solid black;
+                margin-left: 20px;
+            }
+            #all-the-stuff{
+                display: flex;
+                justify-content: space-between;
+            }
+            #rules{
+                width: 500px;
+                padding: 10px;
+                color: white;
+                font-family: Futura, "Trebuchet MS", Arial, sans-serif;
             }
         </style>
     </head>
     <body>
-        <canvas id="game-canvas" width='800' height='499' style="background: url('img/space.jpg') no-repeat; background-size: 778px 482px; background-color: black; "></canvas>
+        <h1>Can't Catch Me</h1>
+        <div id='all-the-stuff'>
+            <div id='rules'>
+                <h3>Rules</h3>
+                <p>Goal is to capture as many ghosts as possible in the smallest confined area.
+                    The game works from right to left. That means your ending box should be the top left corner.
+                    If you draw a line and a ghost is on the right side, well... you should say goodbye
+                    to that ghost D:). Remember all ghosts move at different speed and have different sizes.
+                    Make sure you account for that. If you shoot a laser when a ghost was directly on the laser,
+                    they will wiggle uncontrollably because they are being consistently hit by the laser! Don't torture
+                    the ghosts! They have feelings too!
+                </p>
+            </div>
+            <canvas id="game-canvas" width='800' height='499' style="background: url('img/space.jpg') no-repeat; background-size: 778px 482px; background-color: black; "></canvas>
+            <div id='rules'>
+                <h3>Instructions</h3>
+                <ul>
+                    <li>Arrow keys and "WASD" control the arrows in the bottom right corner</li>
+                    <li>To shoot a laser beam you can use 'Z' or 'K' for a vertical laser
+                        and 'X' and 'L' to shoot lasers horizontally
+                    </li>
+                    <li>You should be trying to get the smallest score possible, because your score
+                        represents your final confined area
+                    </li>
+                    <li>Lastly play to have fun!</li>
+                </ul>
+            </div>
+            <style type='text/css'> 
+                #all-the-stuff{
+                    display: flex;
+                    justify-content: space-between;
+                }
+            </style>
+        </div>
         <script src="main.js"></script>
     </body>
 </html>
