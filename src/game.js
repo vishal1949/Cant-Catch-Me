@@ -29,7 +29,6 @@ class Game {
 
         this.drawGhost = this.drawGhost.bind(this);
         this.drawLaser = this.drawLaser.bind(this);
-        this.updateDimensions = this.updateDimensions.bind(this);
         this.gameOver = this.gameOver.bind(this);
         this.areaCalculator = this.areaCalculator.bind(this);
 
@@ -37,15 +36,6 @@ class Game {
         
     }
 
-    updateDimensions(newDimension){
-        if(this.dimensions[maxHeight] < newDimension[maxHeight]){
-            this.dimensions[maxHeight] = newDimension[maxHeight];
-        }
-        if(this.dimensions[maxWidth] < newDimension[maxWidth]){
-            this.dimensions[maxWidth] = newDimension[maxWidth];
-        }
-        
-    }
 
     areaCalculator(){
         let area;
@@ -67,7 +57,7 @@ class Game {
             this.drawLaser(this.lasers);
             if (this.lasers[0].laserArray.length > 0) this.lasers[0].drawLaser();
             if (this.lasers[1].laserArray.length > 0) this.lasers[1].drawLaser();
-            console.log(this.dimensions)
+            (this.dimensions)
             this.gameOver();
         });
         for (let i = 0; i < ghostArray.length; i++) {
@@ -84,15 +74,11 @@ class Game {
             let laserDirection = lasers[i].whichLaserShoots();
             // debugger
             if (laserDirection === 'vertical'){
-                // this.updateDimensions(lasers[0].laserArray[lasers[0].laserArray.length - 1].returnValues())
                 let newDimension = lasers[0].laserArray[lasers[0].laserArray.length - 1].returnValues();
-                console.log(this.dimensions);
                 if (this.dimensions.maxHeight > newDimension.maxHeight) {
                     this.dimensions.maxHeight = newDimension.maxHeight;
-                    console.log(this.dimensions);
                 }
             } else if(laserDirection === 'horizontal'){
-                // this.updateDimensions(lasers[1].laserArray[lasers[1].laserArray.length - 1].returnValues())
                 let newDimension = lasers[1].laserArray[lasers[1].laserArray.length - 1].returnValues();
                 if (this.dimensions.maxWidth > newDimension.maxWidth) {
                     this.dimensions.maxWidth = newDimension.maxWidth;
