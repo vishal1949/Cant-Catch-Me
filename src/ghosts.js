@@ -9,16 +9,18 @@ class Ghost {
         this.xpos = getRandomInt(650);
         this.ypos = getRandomInt(450);
         this.dimensions = dimensions;
+        // this.velX = getRandomInt(10);
+        // this.velY = getRandomInt(-10)
         let v = getRandomInt(3)
         if(v === 2){
             this.velX = 7
             this.velY = -7;
         }else if(v === 1){
-            this.velX = -6;
-            this.velY = 7;
+            this.velX = -8;
+            this.velY = 9;
         }else{
-            this.velX = -7;
-            this.velY = -8;
+            this.velX = -9;
+            this.velY = -10;
         }
         let r = getRandomInt(3);
         if(r === 1){
@@ -31,7 +33,6 @@ class Ghost {
         this.ctx = document.getElementById("game-canvas").getContext('2d');
         this.moveDirection = this.moveDirection.bind(this);
     }
-
     
     moveDirection() {
         this.xpos += this.velX;

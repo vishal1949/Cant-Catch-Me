@@ -67,7 +67,6 @@ class Game {
             alert(`YOU WIN! Your score is ${this.areaCalculator()}`);
             this.winner = true;
         } 
-        
     }
 
     wait(time) { //in seconds
