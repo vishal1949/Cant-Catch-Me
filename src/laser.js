@@ -8,12 +8,12 @@ class Laser {
         this.laserArray = [];
         if(direction === 'vertical'){
             this.direction = 'vertical'
-            this.icon.src = "img/sidwaysArrow.png";
+            this.icon.src = "img/sidwaysArrow.jpg";
             this.xpos = 775;
             this.ypos = 460;
         }else{
             this.direction = 'horizontal'
-            this.icon.src = "img/arrow.png";
+            this.icon.src = "img/arrow.jpg";
             this.xpos = 750;
             this.ypos = 480;
         }
